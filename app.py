@@ -14,7 +14,8 @@ data = pd.read_csv(r'C:\Users\gadea\Desktop\practice\mlops\data\WineQT.csv')
 data['quality_label'] = (data['quality'] >= 7).astype(int)
 
 # Features and target
-X = data.drop(['quality', 'quality_label'], axis=1)
+feature_columns = [col for col in data.columns if col not in ['quality', 'quality_label']]
+X = data[feature_columns]
 y = data['quality_label']
 
 # Split the data
@@ -66,3 +67,4 @@ with mlflow.start_run():
     }).sort_values(by="importance", ascending=False)
     feature_importances.to_csv(importances_path, index=False)
     mlflow.log_artifact(importances_path)
+
