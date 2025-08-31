@@ -14,7 +14,7 @@ data = pd.read_csv(r'C:\Users\gadea\Desktop\practice\mlops\data\WineQT.csv')
 data['quality_label'] = (data['quality'] >= 7).astype(int)
 
 # Features and target
-feature_columns = [col for col in data.columns if col not in ['quality', 'quality_label']]
+feature_columns = [col for col in data.columns if col not in ['Id', 'quality', 'quality_label']]
 X = data[feature_columns]
 y = data['quality_label']
 
@@ -24,6 +24,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Train a classifier
 clf = RandomForestClassifier(random_state=42)
 clf.fit(X_train, y_train)
+
 
 # Predict and evaluate
 y_pred = clf.predict(X_test)
