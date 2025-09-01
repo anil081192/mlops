@@ -7,6 +7,22 @@ app = Flask(__name__)
 with open("model.pkl", "rb") as f:
     model = pickle.load(f)
 
+# Home route (API name / description)
+@app.route("/", methods=["GET"])
+def home():
+    return """
+    <h1>🍷 Power Peta ML API</h1>
+    <p>This API serves a trained ML model for wine quality prediction.</p>
+    <p>Use the <b>/predict</b> endpoint with JSON data to get predictions.</p>
+    <hr>
+    <pre>
+    Example request:
+    curl -X POST http://127.0.0.1:5000/predict \\
+        -H "Content-Type: application/json" \\
+        -d '{"features":[8.0,0.5,0.46,2.5,0.05,15.0,46.0,1.0,3.3,0.7,10.0]}'
+    </pre>
+    """
+
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
@@ -20,7 +36,7 @@ def predict():
         # Make prediction
         prediction = model.predict([features])[0]
 
-        # Check if model supports predict_proba (e.g. classifiers like RandomForest, LogisticRegression)
+        # Check if model supports predict_proba
         if hasattr(model, "predict_proba"):
             probabilities = model.predict_proba([features]).tolist()[0]
             return jsonify({
