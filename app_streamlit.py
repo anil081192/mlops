@@ -12,7 +12,7 @@ def load_model(path):
 st.title("Wine Quality Prediction App")
 
 # Set the model path directly (no input box in UI)
-model_path = r"C:\Users\gadea\Desktop\practice\mlops\model.pkl"
+model_path = "model.pkl"
 model = None
 try:
     model = load_model(model_path)
@@ -62,4 +62,6 @@ if model:
             st.success(f"Predicted Wine Quality: {label} ({prediction})")
         except Exception as e:
             st.error(f"Prediction error: {e}")
+
+            
 
