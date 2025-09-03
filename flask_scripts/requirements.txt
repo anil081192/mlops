@@ -1,5 +1,4 @@
 #requirements
-streamlit
-pandas
+flask
 scikit-learn
 
