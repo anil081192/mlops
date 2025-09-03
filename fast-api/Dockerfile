@@ -15,5 +15,5 @@ COPY . .
 EXPOSE 5000
 
 # Command to run the FastAPI app with uvicorn
-CMD ["uvicorn", "main:app_fastapi.py", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["uvicorn", "main:app_fastapi.py", "--host", "0.0.0.0", "--port", "8000"]
 
